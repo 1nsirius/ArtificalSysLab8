@@ -4,6 +4,7 @@
 1. Выполните парсинг и обработку данных. 2. Разделите данные на обучающую и проверочную выборки
 3. Спроектируйте сеть для регрессии
 4. Визуализируйте результаты обучения и работы сети
+
 Датасет: Wine Quality Dataset
 Источник: https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv
 
