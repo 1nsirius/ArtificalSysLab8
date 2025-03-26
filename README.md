@@ -8,6 +8,7 @@
 4. Визуализируйте результаты обучения и работы сети
 
 Датасет: Wine Quality Dataset
+
 Источник: https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv
 
 Входные данные датасета состоят из 11 признаков и одной целевой переменной (качество вина):
