@@ -1,0 +1,48 @@
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from keras.models import Sequential
+from keras.layers import Dense
+import matplotlib.pyplot as plt
+
+# 1. Выполнение парсинга и обработки данных
+
+# Загрузка датасета
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv"
+data = pd.read_csv(url, sep=';')
+
+# Просмотр первых строк датасета
+print(data.head())
+
+# 2. Разделение данных на обучающую и проверочную выборки
+
+# Определяем признаки и целевую переменную
+X = data.drop('quality', axis=1)  # Все колонки, кроме 'quality'
+y = data['quality']  # Колонка 'quality' как целевая переменная
+
+# Разделение данных на обучающую и проверочную выборки
+X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# 3. Проектирование сети для регрессии
+
+# Создание модели
+model = Sequential()
+model.add(Dense(64, activation='relu', input_shape=(X_train.shape[1],)))
+model.add(Dense(64, activation='relu'))
+model.add(Dense(1))  # Выходной слой для регрессии
+
+# Компиляция модели
+model.compile(optimizer='adam', loss='mean_squared_error')
+
+# 4. Обучение модели и визуализация результатов
+
+# Обучение модели
+history = model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=100, batch_size=32, verbose=0)
+
+# Визуализация потерь
+plt.plot(history.history['loss'], label='train')
+plt.plot(history.history['val_loss'], label='validation')
+plt.title('Model Loss')
+plt.ylabel('Loss')
+plt.xlabel('Epoch')
+plt.legend()
+plt.show()
